@@ -6,6 +6,9 @@ function invert(input_str, dot_for_blank=false) {
     if (dot_for_blank) {
         braille_dic_invert['⣿'] = '⠄';
         braille_dic_invert['⠄'] = '⣿';
+	} else {
+		braille_dic_invert['⣿'] = '⠀';
+        braille_dic_invert['⠄'] = '⢿';
 	}
 
     let result_str = "";
