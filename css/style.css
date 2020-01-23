@@ -10,8 +10,8 @@ body {
 
 #content {
 	padding: 50px;
-    display: flex;
-    flex-direction: row;
+	display: flex;
+	flex-direction: row;
 }	
 
 textarea {
@@ -32,8 +32,8 @@ textarea {
 
 #out {
 	margin-left: 100px;
-    display: flex;
-    flex-direction: row;
+	display: flex;
+	flex-direction: row;
 }
 
 #out textarea {

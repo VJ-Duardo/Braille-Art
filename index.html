@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
-    <head>
-      <meta charset="utf-8">
-      <title>Transform Braille Art</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	  <link rel="stylesheet" href="css/style_smol.css">
-      <link rel="stylesheet" media="screen and (min-width: 1444px) and (min-height: 769px)" href="css/style.css">
+	<head>
+		<meta charset="utf-8">
+		<title>Transform Braille Art</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="css/style_smol.css">
+		<link rel="stylesheet" media="screen and (min-width: 1444px) and (min-height: 769px)" href="css/style.css">
+		<script src="js/braille_data.js"></script>
+		<script src="js/braille.js"></script>
     </head>
     <body>
 		<h1> Rotate/Invert Braille Pictures </h1>
@@ -21,7 +23,7 @@
 					<button>Rotate</button>
 					<div>
 						<input type="checkbox" id="dotForBlank" value="False">
-						<label for="dotForBlank">Use invisible characters</label>
+						<label for="dotForBlank">Replace blank characters</label>
 					</div>
 				</div>
 			</div>
