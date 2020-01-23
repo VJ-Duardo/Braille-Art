@@ -7,11 +7,11 @@ function click(task){
 }
 
 function invert_click(){
-		click(invert);
+	click(invert);
 }
 
 function rotate_click(){
-		click(turn_90);
+	click(turn_90);
 }
 
 
