@@ -257,35 +257,33 @@ var braille_descr_dic = {
 	'12345678': '⣿',
 };
 
-var upper_dic_90 = {
-	'1': '4',
-	'2': '1',
-	'4': '5',
-	'5': '2',
-	'3': '4',
-	'6': '5',
-	'7': '1',
-	'8': '2',
-	'0': '0'
-};
-
-var lower_dic_90 = {
-	'1': '6',
-	'2': '3',
-	'4': '8',
-	'5': '7',
-	'3': '6',
-	'6': '8',
-	'7': '3',
-	'8': '7',
-	'0': '0'
-};
-
-var remove_list_upper = ['3', '6', '7', '8'];
-var remove_list_lower = ['1', '2', '4', '5'];
-
 
 function create_turn90_dic() {
+	let upper_dic_90 = {
+		'1': '4',
+		'2': '1',
+		'4': '5',
+		'5': '2',
+		'3': '4',
+		'6': '5',
+		'7': '1',
+		'8': '2'
+	};
+
+	let lower_dic_90 = {
+		'1': '6',
+		'2': '3',
+		'4': '8',
+		'5': '7',
+		'3': '6',
+		'6': '8',
+		'7': '3',
+		'8': '7'
+	};
+
+	let remove_list_upper = ['3', '6', '7', '8'];
+	let remove_list_lower = ['1', '2', '4', '5'];
+	
 	let result_dic = {};
 	for (const key_left of Object.keys(braille_descr_dic)) {
 		for (const key_right of Object.keys(braille_descr_dic)) {
@@ -334,6 +332,31 @@ function create_invert_dic() {
 			}
 		}
 		result_dic[braille_descr_dic[key]] = braille_descr_dic[inverted_char];
+	}
+	return result_dic;
+}
+
+
+function create_mirror_dic() {
+	let mirrored_values_dic = {
+		'1': '4',
+		'2': '5',
+		'3': '6',
+		'4': '1',
+		'5': '2',
+		'6': '3',
+		'7': '8',
+		'8': '7'
+	};
+
+	let result_dic = {};
+	for (const key of Object.keys(braille_descr_dic)) {
+		let mirrored_key = '';
+		for (i=0; i<key.length; i++) {
+			mirrored_key += mirrored_values_dic[key[i]];
+		}
+		mirrored_key = mirrored_key.split("").map(Number).sort((a, b) => (a - b));
+		result_dic[braille_descr_dic[key]] = braille_descr_dic[mirrored_key.join('')];
 	}
 	return result_dic;
 }

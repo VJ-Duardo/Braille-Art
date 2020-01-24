@@ -14,6 +14,10 @@ function rotate_click(){
 	click(turn_90);
 }
 
+function mirror_click(){
+	click(mirror);
+}
+
 
 function use_new_result(){
 	document.getElementById("input").value = document.getElementById("output").value;
