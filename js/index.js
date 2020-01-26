@@ -3,7 +3,7 @@ function click(task){
 	let input = document.getElementById("input").value;
 	let dot_for_blank = document.getElementById("dotForBlank").checked;
 	let output = task(input, dot_for_blank);
-	document.getElementById("output").value = output;
+	document.getElementById("input").value = output;
 }
 
 function invert_click(){
@@ -16,10 +16,4 @@ function rotate_click(){
 
 function mirror_click(){
 	click(mirror);
-}
-
-
-function use_new_result(){
-	document.getElementById("input").value = document.getElementById("output").value;
-	document.getElementById("output").value = "";
 }

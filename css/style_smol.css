@@ -12,7 +12,7 @@ textarea {
 }
 
 footer {
-	margin-top: 5px;
+	position: fixed;
 	padding: 2px;
 	bottom:0px;
 	width: 100%;

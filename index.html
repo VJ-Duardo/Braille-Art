@@ -5,7 +5,7 @@
 		<title>Transform Braille Art</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" href="css/style_smol.css">
-		<link rel="stylesheet" media="screen and (min-width: 1444px) and (min-height: 769px)" href="css/style.css">
+		<link rel="stylesheet" media="screen and (min-width: 900px) and (min-height: 769px)" href="css/style.css">
 		<script src="js/braille_data.js"></script>
 		<script src="js/braille.js"></script>
 		<script src="js/index.js"></script>
@@ -14,19 +14,13 @@
 		<h1> Rotate/Invert/Mirror Braille Pictures </h1>
 		<div id="content">
 			<textarea id="input" placeholder="Input Here!"></textarea>
-			<div id="out">
-				<div id="toinput">
-					<button onclick="use_new_result()"> ← </button>
-				</div>
-				<textarea id="output" placeholder="Output Here!" readonly></textarea>
-				<div id="controls">
-					<button onclick="invert_click()">Invert</button>
-					<button onclick="rotate_click()">Rotate</button>
-					<button onclick="mirror_click()">Mirror</button>
-					<div>
-						<input type="checkbox" id="dotForBlank" value="False">
-						<label for="dotForBlank">Replace blank characters</label>
-					</div>
+			<div id="controls">
+				<button onclick="invert_click()">Invert</button>
+				<button onclick="rotate_click()">Rotate</button>
+				<button onclick="mirror_click()">Mirror</button>
+				<div>
+					<input type="checkbox" id="dotForBlank" value="False">
+					<label for="dotForBlank">Replace blank characters</label>
 				</div>
 			</div>
 		</div>
