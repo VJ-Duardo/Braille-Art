@@ -28,14 +28,23 @@ textarea {
     background:rgba(230,230,230,0.5);
 }
 
+#controls hr{
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
 
-#controls {
+
+.control {
     display: flex;
     flex-direction: column;
 }
 
-#controls > * {
+.control > * {
     margin-bottom: 10px;	
+}
+
+.control button {
+    width: 150px;
 }
 
 footer {
