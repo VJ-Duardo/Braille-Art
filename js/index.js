@@ -7,8 +7,13 @@ var file_input = document.getElementById("fileinput");
 var height_input = document.getElementById("height");
 var width_input = document.getElementById("width");
 
+var brightness_input = document.getElementById("brightness");
+brightness_input.oninput = generate_click;
+
 var canvas = document.createElement('canvas');
 var context = canvas.getContext('2d');
+
+var default_size = 100;
 
 
 function click(task) {
@@ -45,11 +50,19 @@ function generate_click(){
         image.src = readerEvent.target.result;
         
         image.onload = function(){
-            canvas.width = width_input.value;
-            canvas.height = height_input.value;
+            canvas.width = isNum(width_input.value);
+            canvas.height = isNum(height_input.value);
             context.drawImage(image, 0, 0, canvas.width, canvas.height);
             let pixel_data = context.getImageData(0, 0, canvas.width, canvas.height).data;
-            text_input.value = iterate_over_pixels(pixel_data, canvas.width, option_checkbox.checked);
-        }
+            text_input.value = iterate_over_pixels(pixel_data, canvas.width, option_checkbox.checked, brightness_input.value);
+        };
+    };
+}
+
+function isNum(val){
+    if (isNaN(parseInt(val))){
+        return default_size;
+    } else {
+        return val;
     }
 }

@@ -1,7 +1,8 @@
 var color_treshold = 150;
 
 
-function iterate_over_pixels(data_array, width, dot_for_blank){
+function iterate_over_pixels(data_array, width, dot_for_blank, brightness){
+    color_treshold = 255 - brightness;
     let result_array = new Array();
     let pixel_array = new Array();
     for(i=0; i<data_array.length; i+=4){
