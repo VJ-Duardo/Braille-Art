@@ -28,8 +28,11 @@ function mirror_click() {
 }
 
 
-file_input.onchange = e => {
-    let file = e.target.files[0];
+function generate_click(){
+    if (file_input.files.length === 0) {
+        return;
+    }
+    let file = file_input.files[0];
     
     let reader = new FileReader();
     reader.readAsDataURL(file);
@@ -41,9 +44,9 @@ file_input.onchange = e => {
         image.onload = function(){
             canvas.width = image.width;
             canvas.height = image.height;
-            context.drawImage(image, 0, 0 );
-            let pixel_data = context.getImageData(0, 0, image.width, image.height).data;
-            text_input.value = iterate_over_pixels(pixel_data, image.width, option_checkbox.checked);
+            context.drawImage(image, 0, 0, canvas.width, canvas.height);
+            let pixel_data = context.getImageData(0, 0, canvas.width, canvas.height).data;
+            text_input.value = iterate_over_pixels(pixel_data, canvas.width, option_checkbox.checked);
         }
     }
 }
