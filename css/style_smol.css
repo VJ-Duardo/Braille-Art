@@ -4,10 +4,6 @@ body {
 }
 
 textarea {
-    width: 320px;
-    height: 250px;
-    max-height: 100vh;
-    max-width: 100vh;
     background:rgba(230,230,230,0.5);
 }
 

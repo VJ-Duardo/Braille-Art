@@ -55,6 +55,8 @@ function generate_click(){
             context.drawImage(image, 0, 0, canvas.width, canvas.height);
             let pixel_data = context.getImageData(0, 0, canvas.width, canvas.height).data;
             text_input.value = iterate_over_pixels(pixel_data, canvas.width, option_checkbox.checked, brightness_input.value);
+            text_input.cols = Math.ceil(canvas.width/2)*1.5;
+            text_input.rows = Math.ceil(canvas.height/4)*1.2;
         };
     };
 }
