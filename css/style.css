@@ -28,9 +28,11 @@ textarea {
     background:rgba(230,230,230,0.5);
 }
 
-#controls hr{
-    margin-top: 25px;
-    margin-bottom: 25px;
+#dotOption{
+    display: flex;
+    flex-direction: row;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 

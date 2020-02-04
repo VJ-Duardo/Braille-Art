@@ -16,12 +16,11 @@
                     <button onclick="invert_click()">Invert</button>
                     <button onclick="rotate_click()">Rotate</button>
                     <button onclick="mirror_click()">Mirror</button>
-                    <div>
-                        <input type="checkbox" id="dotForBlank" value="False">
-                        <label for="dotForBlank">Replace blank characters</label>
-                    </div>
 		</div>
-                <hr />
+                <div class="control" id="dotOption">
+                    <input type="checkbox" id="dotForBlank" value="True" checked>
+                    <label for="dotForBlank">Replace blank characters</label>
+                </div>
                 <div class="control">                    
                     <input id="fileinput" type="file" accept=".png, .jpeg, .jpg">
                 </div>
@@ -33,6 +32,8 @@
         </footer>
         <script src="js/braille_data.js"></script>
         <script src="js/braille.js"></script>
+        <script src="js/Pixel.js"></script>
+        <script src="js/generate.js"></script>
         <script src="js/index.js"></script>
     </body>
 </html>
