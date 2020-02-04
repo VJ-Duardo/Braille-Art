@@ -17,9 +17,9 @@ function iterate_over_pixels(data_array, width, dot_for_blank){
     }
     
     if (dot_for_blank){
-        return result_array.join(' ').replace(/[⠀]/g, '⠄');
+        return result_array.join('\n').replace(/[⠀]/g, '⠄');
     } else {
-        return result_array.join(' ');
+        return result_array.join('\n');
     }
 }
 

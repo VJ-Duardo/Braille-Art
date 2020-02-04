@@ -12,7 +12,7 @@
         <div id="content">
             <textarea id="input" placeholder="Paste in a braille art string here or create one by providing a picture on the right."></textarea>
             <div id="controls">
-                <div class="control">
+                <div class="control" id="transform">
                     <button onclick="invert_click()">Invert</button>
                     <button onclick="rotate_click()">Rotate</button>
                     <button onclick="mirror_click()">Mirror</button>
@@ -23,7 +23,17 @@
                 </div>
                 <div class="control">                    
                     <input id="fileinput" type="file" accept=".png, .jpeg, .jpg">
-                    <button onclick="generate_click()">Generate</button>
+                    <table>
+                        <tr>
+                            <td>Height:</td>
+                            <td><input type="number" id="height" value="100" step="10"></td>
+                        </tr>
+                        <tr>
+                            <td>Witdh:</td>
+                            <td><input type="number" id="width" value="100" step="10"></td>
+                        </tr>
+                    </table>
+                    <button id="genButton" onclick="generate_click()">Generate</button>
                 </div>
             </div>
         </div>

@@ -29,14 +29,12 @@ textarea {
 }
 
 #dotOption{
-    display: flex;
-    flex-direction: row;
+    display: inline-block;
     margin-top: 30px;
     margin-bottom: 30px;
 }
 
-
-.control {
+#transform {
     display: flex;
     flex-direction: column;
 }
@@ -46,7 +44,16 @@ textarea {
 }
 
 .control button {
-    width: 150px;
+    width: 125px;
+}
+
+#width, #height {
+    width: 60px;
+}
+
+
+#genButton {
+    margin-top: 15px;
 }
 
 footer {

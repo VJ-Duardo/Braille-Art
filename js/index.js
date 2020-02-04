@@ -4,6 +4,9 @@ var option_checkbox = document.getElementById("dotForBlank");
 
 var file_input = document.getElementById("fileinput");
 
+var height_input = document.getElementById("height");
+var width_input = document.getElementById("width");
+
 var canvas = document.createElement('canvas');
 var context = canvas.getContext('2d');
 
@@ -42,8 +45,8 @@ function generate_click(){
         image.src = readerEvent.target.result;
         
         image.onload = function(){
-            canvas.width = image.width;
-            canvas.height = image.height;
+            canvas.width = width_input.value;
+            canvas.height = height_input.value;
             context.drawImage(image, 0, 0, canvas.width, canvas.height);
             let pixel_data = context.getImageData(0, 0, canvas.width, canvas.height).data;
             text_input.value = iterate_over_pixels(pixel_data, canvas.width, option_checkbox.checked);
