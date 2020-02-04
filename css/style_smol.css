@@ -11,6 +11,10 @@ textarea {
     background:rgba(230,230,230,0.5);
 }
 
+#controls div{
+    margin-bottom: 20px;
+}
+
 footer {
     position: fixed;
     padding: 2px;
