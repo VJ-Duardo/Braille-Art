@@ -50,7 +50,13 @@ textarea {
     margin-top: 15px;
 }
 
+#status {
+    color: red;
+}
+
 footer {
+    display: flex;
+    flex-direction: row;
     z-index: 1;
     position:fixed;
     bottom:0px;
@@ -61,4 +67,20 @@ footer {
 
 footer p {
     margin-left: 50px;
+    
+}
+
+#author {
+    margin-right: 70px;
+}
+
+#apis {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+#apis p{
+    float: left;
 }

@@ -5,8 +5,7 @@ const corsproxy = "https://cors-anywhere.herokuapp.com/";
 function get_json_prom(url){
     return fetch(url)
             .then(response => response.json())
-            .then(json => (json))
-            .catch(error => console.error("Network problem: "+ error));
+            .then(json => (json));
 }
 
 
@@ -88,7 +87,7 @@ function search_twitch(emote){
 
 function search_bttv(channel, emote){
     let bttv_global = 'https://api.betterttv.net/2/emotes';
-    let bttv_channel = 'https://api.betterttv.net/2/channels/forsen';
+    let bttv_channel = 'https://api.betterttv.net/2/channels/' + channel;
     let bttv_pic_link = 'https://cdn.betterttv.net/emote/';
     
     function iterate_bttv(obj){

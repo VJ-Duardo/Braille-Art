@@ -12,6 +12,10 @@ var brightness_input = document.getElementById("brightness");
 var channel_input = document.getElementById("channel");
 var emote_input = document.getElementById("emote");
 
+var status_line = document.getElementById("status");
+var text = document.createTextNode("");
+status_line.appendChild(text);
+
 var canvas = document.createElement('canvas');
 var context = canvas.getContext('2d');
 
@@ -57,11 +61,13 @@ function generate_click(){
 
 
 function generate_from_twitch_click(){
-    search_all(channel_input.value, emote_input.value)
+    search_all(channel_input.value.replace(/\s/g, ''), emote_input.value.replace(/\s/g, ''))
             .then((url) => {
                 if (typeof url === 'undefined'){
+                    text.nodeValue = "Could not be found.";
                     return;
                 }
+                text.nodeValue = "";
                 process_image(url);
     });
 }
