@@ -23,6 +23,8 @@ var default_size = 100;
 
 var cached_url;
 
+var background_white = true;
+
 
 function click(task) {
     let input = text_input.value;
@@ -88,8 +90,8 @@ function process_image(src){
     cached_url = src;
     
     image.onload = function(){
-        canvas.width = isNum(width_input.value);
-        canvas.height = isNum(height_input.value);
+        canvas.width = is_num(width_input.value);
+        canvas.height = is_num(height_input.value);
         context.drawImage(image, 0, 0, canvas.width, canvas.height);
         let pixel_data = context.getImageData(0, 0, canvas.width, canvas.height).data;
         text_input.value = iterate_over_pixels(pixel_data, canvas.width, option_checkbox.checked, brightness_input.value);
@@ -99,10 +101,23 @@ function process_image(src){
 }
 
 
-function isNum(val){
+function is_num(val){
     if (isNaN(parseInt(val))){
         return default_size;
     } else {
         return val;
+    }
+}
+
+
+function toggle_background(){
+    if (background_white){
+        text_input.style.background = 'rgba(20,20,20,0.5)';
+        text_input.style.color = 'white';
+        background_white = false;
+    } else {
+        text_input.style.background = 'rgba(230,230,230,0.5)';
+        text_input.style.color = 'black';
+        background_white = true;
     }
 }
