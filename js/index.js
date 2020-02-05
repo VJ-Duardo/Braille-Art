@@ -56,8 +56,6 @@ function generate_click(){
 
 
 
-
-
 function generate_from_twitch_click(){
     search_all(channel_input.value, emote_input.value)
             .then((url) => {

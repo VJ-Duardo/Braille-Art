@@ -5,7 +5,8 @@ const corsproxy = "https://cors-anywhere.herokuapp.com/";
 function get_json_prom(url){
     return fetch(url)
             .then(response => response.json())
-            .then(json => (json));
+            .then(json => (json))
+            .catch(error => console.error("Network problem: "+ error));
 }
 
 
@@ -28,21 +29,21 @@ function search_ffz(channel, emote){
     }
     
     return get_json_prom(ffz_global)
-        .then((json_obj) => {
+        .then((global_obj) => {
             let attributes = ['3', '4330'];
             for (const attr of attributes){
-                let search_result = iterate_ffz(json_obj, attr);
+                let search_result = iterate_ffz(global_obj, attr);
                 if (search_result !== -1){
                     return search_result;
                 }
             }
             return get_json_prom(ffz_channel)
-                .then((json_obj) => {
-                    if (json_obj.hasOwnProperty("error")){
+                .then((channel_obj) => {
+                    if (channel_obj.hasOwnProperty("error")){
                         return;
                     }
-                    channel_id = json_obj['room']['twitch_id'];
-                    let search_result = iterate_ffz(json_obj, json_obj['room']['set']);
+                    channel_id = channel_obj['room']['twitch_id'];
+                    let search_result = iterate_ffz(channel_obj, channel_obj['room']['set']);
                     if (search_result !== -1){
                         return search_result;
                     }
@@ -71,22 +72,52 @@ function search_twitch(emote){
     return get_json_prom(corsproxy + twitch_global)
         .then((global_obj) => {
             let search_result = iterate_twitch(global_obj);
-            if (search_result === -1){
-                console.log("notfound");
-            } else {
+            if (search_result !== -1){
                 return search_result;
             }
             return get_json_prom(corsproxy + (twitch_channel + channel_id))
-                .then((json_obj) => {
-                    console.log(channel_id);
-                    let search_result = iterate_twitch(json_obj);
-                    if (search_result === -1){
-                        console.log("notfound");
-                    } else {
+                .then((channel_obj) => {
+                    let search_result = iterate_twitch(channel_obj);
+                    if (search_result !== -1){
                         return search_result;
                     }
                 });
         });
+}
+
+
+function search_bttv(channel, emote){
+    let bttv_global = 'https://api.betterttv.net/2/emotes';
+    let bttv_channel = 'https://api.betterttv.net/2/channels/forsen';
+    let bttv_pic_link = 'https://cdn.betterttv.net/emote/';
+    
+    function iterate_bttv(obj){
+        if (obj.hasOwnProperty("message") && obj['message'] === "channel not found"){
+            return -1;
+        }
+        for (const item of obj['emotes']){
+            if (item['code'] === emote){
+                return corsproxy + bttv_pic_link + item['id']+'/2x';
+            }
+        }
+        return -1;
+    }
+    
+    return get_json_prom(bttv_global)
+        .then((global_obj) => {
+            let search_result = iterate_bttv(global_obj);
+            if (search_result !== -1){
+                return search_result;
+            }
+            return get_json_prom(bttv_channel)
+                .then((channel_obj) => {
+                    let search_result = iterate_bttv(channel_obj);
+                    if (search_result !== -1){
+                        return search_result;
+                    }
+                });
+        });
+    
 }
 
 
@@ -101,6 +132,13 @@ function search_all(channel, emote){
                         if (typeof result_twitch !== 'undefined') {
                             return result_twitch;
                         }
+                        return search_bttv(channel, emote)
+                            .then((result_bttv) => {
+
+                                if (typeof result_bttv !== 'undefined') {
+                                    return result_bttv;
+                                }
+                            });
                 });
     });
 }
