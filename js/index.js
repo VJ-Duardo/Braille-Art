@@ -1,29 +1,46 @@
 var text_input = document.getElementById("input");
 
-var option_checkbox = document.getElementById("dotForBlank");
+var input_select = document.getElementById("inputSelection");
 
-var file_input = document.getElementById("fileinput");
-
-var height_input = document.getElementById("height");
-var width_input = document.getElementById("width");
-
-var brightness_input = document.getElementById("brightness");
-
+var twitch_input_table = document.getElementById("twitchInput");
 var channel_input = document.getElementById("channel");
 var emote_input = document.getElementById("emote");
-
 var status_line = document.getElementById("status");
 var text = document.createTextNode("");
 status_line.appendChild(text);
 
+var file_input = document.getElementById("fileinput");
+
+var option_checkbox = document.getElementById("dotForBlank");
+
+var brightness_input = document.getElementById("brightness");
+var height_input = document.getElementById("height");
+var width_input = document.getElementById("width");
+var gen_button = document.getElementById("genButton");
+
 var canvas = document.createElement('canvas');
 var context = canvas.getContext('2d');
 
-var default_size = 100;
-
+var default_size = 60;
 var cached_url;
-
 var background_white = true;
+
+
+gen_button.onclick = generate_from_twitch_click;
+input_select.onchange = (function(){
+    switch(input_select.value){
+        case "upload":
+            twitch_input_table.style.display = "none";
+            file_input.style.display = "block";
+            gen_button.onclick = generate_click;
+            break;
+        case "twitch":
+            file_input.style.display = "none";
+            twitch_input_table.style.display = "block";
+            gen_button.onclick = generate_from_twitch_click;
+            break;
+    }
+});
 
 
 function click(task) {
@@ -59,8 +76,6 @@ function generate_click(){
         process_image(readerEvent.target.result);
     };
 }
-
-
 
 function generate_from_twitch_click(){
     search_all(channel_input.value.replace(/\s/g, ''), emote_input.value.replace(/\s/g, ''))

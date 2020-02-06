@@ -11,6 +11,10 @@ textarea {
     margin-bottom: 20px;
 }
 
+#status {
+    color: red;
+}
+
 footer {
     padding: 2px;
     bottom:0px;

@@ -4,17 +4,99 @@
         <meta charset="utf-8">
         <title>Create & Transform Braille Art</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/style_smol.css">
+        <link rel="stylesheet" media="screen and (min-width: 900px) and (min-height: 769px)" href="css/style.css">
     </head>
     <body>
-        <h1>Online Braille Art Tools</h1>
-        <ul>
-            <li><p><a href="create-and-transform.html"> Create & Rotate/Invert/Mirror Braille Pictures</a></p></li>
-            <li><p><a href="twitch-emote-to-braille.html"> Create Braille Art from Twitch FFZ/BTTV & Channel Emotes</a></p></li>
-        </ul>
+        <h1> Create Braille Pictures from Twitch Emotes and Images </h1>
+        <div id="content">
+            <textarea id="input" cols="70" rows="30" placeholder="Paste in your braille art string to transform it, or select an input method on the right."></textarea>
+            <div id="controls">
+                <div class="control" id="input">
+                    <label for="inputSelection"><b>Input from:</b> </label>
+                    <select id="inputSelection">
+                        <option value="twitch">Twitch Emote</option>
+                        <option value="upload">Upload</option>
+                    </select>
+                    <table id="twitchInput">
+                        <tr>
+                            <td>Channel: </td>
+                            <td><input id="channel" type="text"></td>
+                        </tr>
+                        <tr>
+                            <td>Emote: </td>
+                            <td><input id="emote" type="text"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td id="status"></td>
+                        </tr>
+                    </table>
+                    <input id="fileinput" type="file" accept=".png, .jpeg, .jpg" style="display: none">
+		</div>
+                <div class="control" id="dotOption">
+                    <input type="checkbox" id="dotForBlank" value="True" checked>
+                    <label for="dotForBlank">Replace blank characters</label>
+                </div>
+                <div class="control">
+                    <table>
+                        <tr>
+                            <td>Brightness: </td>
+                            <td><input type="range" id="brightness" oninput="slider_drag()" min="0" max="255" value="105"></td>
+                        </tr>
+                        <tr>
+                            <td>Height:</td>
+                            <td><input type="number" id="height" value="60" step="10"></td>
+                        </tr>
+                        <tr>
+                            <td>Witdh:</td>
+                            <td><input type="number" id="width" value="60" step="10"></td>
+                        </tr>
+                    </table>
+                    <button id="genButton">Generate</button>
+                </div>
+                <div class="control" id="transform">
+                    <button onclick="invert_click()">Invert</button>
+                    <button onclick="rotate_click()">Rotate</button>
+                    <button onclick="mirror_click()">Mirror</button>
+		</div>
+                <button id="background" onclick="toggle_background()">Toggle Background</button>
+            </div>
+        </div>
         <footer>
-            <p> By VJ-Duardo </p>
-            <p> Github: <a href="https://github.com/VJ-Duardo/Transform-Braille-Art" target="_blank">VJ-Duardo/Transform-Braille-Art</a></p>
+            <div id="author">
+                <p><b> By VJ-Duardo </b></p>
+                <p> Github: <a href="https://github.com/VJ-Duardo/Transform-Braille-Art" target="_blank">VJ-Duardo/Transform-Braille-Art</a></p>
+            </div>
+            <div id="apis">
+                <table>
+                    <tr>
+                        <td><b>API's used</b></td>
+                    </tr>
+                    <tr>
+                        <td>Twitch Emotes: </td>
+                        <td><a href="https://twitchemotes.com/apidocs">https://twitchemotes.com/apidocs</a></td>
+                    </tr>
+                    <tr>
+                        <td>BetterTTV: </td>
+                        <td><a href="https://betterttv.com/">https://betterttv.com/</a></td>
+                    </tr>
+                    <tr>
+                        <td>FrankerFaceZ: </td>
+                        <td><a href="https://www.frankerfacez.com/developers">https://frankerfacez.com/developers</a></td>
+                    </tr>
+                    <tr>
+                        <td>CORS Anywhere: </td>
+                        <td><a href="https://github.com/Rob--W/cors-anywhere">https://github.com/Rob--W/cors-anywhere</a></td>
+                    </tr>
+                </table>
+            </div>
         </footer>
+        <script src="js/braille_data.js"></script>
+        <script src="js/braille.js"></script>
+        <script src="js/Pixel.js"></script>
+        <script src="js/generate.js"></script>
+        <script src="js/urlfetcher.js"></script>
+        <script src="js/index.js"></script>
     </body>
 </html>
