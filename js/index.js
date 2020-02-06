@@ -43,10 +43,11 @@ input_select.onchange = (function(){
     }
 });
 
+option_checkbox.onchange = (function() {
+    process_image(cached_url);
+});
+
 transparency_checkbox.onchange = (function(){
-    if (typeof cached_url === 'undefined'){
-        return;
-    }
     process_image(cached_url);
 });
 
@@ -99,14 +100,14 @@ function generate_from_twitch_click(){
 
 
 function slider_drag(){
-    if (typeof cached_url === 'undefined'){
-        return;
-    }
     process_image(cached_url);
 }
 
 
 function process_image(src){
+    if (typeof src === 'undefined'){
+        return;
+    }
     let image = new Image();
     image.crossOrigin = "Anonymous";
     image.src = src;
