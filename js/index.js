@@ -24,7 +24,7 @@ var context = canvas.getContext('2d');
 
 var default_size = 60;
 var cached_url;
-var background_white = true;
+var background_white = false;
 
 
 gen_button.onclick = generate_from_twitch_click;

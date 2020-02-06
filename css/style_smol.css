@@ -4,7 +4,12 @@ body {
 }
 
 textarea {
-    background:rgba(230,230,230,0.5);
+    background:rgba(20,20,20,0.5);
+    color: white;
+}
+
+::placeholder {
+    color: silver;
 }
 
 #controls div{
