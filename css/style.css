@@ -38,10 +38,6 @@ textarea {
     flex-direction: column;
 }
 
-#dotOption{
-    display: inline-block;
-}
-
 #width, #height {
     width: 80px;
 }

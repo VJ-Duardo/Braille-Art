@@ -35,8 +35,16 @@
                     <input id="fileinput" type="file" accept=".png, .jpeg, .jpg" style="display: none">
 		</div>
                 <div class="control" id="dotOption">
-                    <input type="checkbox" id="dotForBlank" value="True" checked>
-                    <label for="dotForBlank">Replace blank characters</label>
+                    <table>
+                        <tr>
+                            <td><input type="checkbox" id="dotForBlank" value="True" checked></td>
+                            <td><label for="dotForBlank">Replace blank characters</label></td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" id="transparency" value="false"></td>
+                            <td><label for="transparency">Fill transparency</label></td>
+                        </tr>
+                    </table>
                 </div>
                 <div class="control">
                     <table>
@@ -53,7 +61,7 @@
                             <td><input type="number" id="width" value="60" step="10"></td>
                         </tr>
                     </table>
-                    <button id="genButton">Generate</button>
+                    <button id="genButton"><b>Generate</b></button>
                 </div>
                 <div class="control" id="transform">
                     <button onclick="invert_click()">Invert</button>

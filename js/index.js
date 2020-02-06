@@ -12,6 +12,7 @@ status_line.appendChild(text);
 var file_input = document.getElementById("fileinput");
 
 var option_checkbox = document.getElementById("dotForBlank");
+var transparency_checkbox = document.getElementById("transparency");
 
 var brightness_input = document.getElementById("brightness");
 var height_input = document.getElementById("height");
@@ -40,6 +41,13 @@ input_select.onchange = (function(){
             gen_button.onclick = generate_from_twitch_click;
             break;
     }
+});
+
+transparency_checkbox.onchange = (function(){
+    if (typeof cached_url === 'undefined'){
+        return;
+    }
+    process_image(cached_url);
 });
 
 
@@ -109,7 +117,7 @@ function process_image(src){
         canvas.height = is_num(height_input.value);
         context.drawImage(image, 0, 0, canvas.width, canvas.height);
         let pixel_data = context.getImageData(0, 0, canvas.width, canvas.height).data;
-        text_input.value = iterate_over_pixels(pixel_data, canvas.width, option_checkbox.checked, brightness_input.value);
+        text_input.value = iterate_over_pixels(pixel_data, canvas.width, option_checkbox.checked, brightness_input.value, transparency_checkbox.checked);
         text_input.cols = Math.ceil(canvas.width/2)*1.5;
         text_input.rows = Math.ceil(canvas.height/4)*1.2;
     };

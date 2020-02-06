@@ -1,7 +1,9 @@
 var color_treshold = 150;
+var fill_transparency = false;
 
 
-function iterate_over_pixels(data_array, width, dot_for_blank, brightness){
+function iterate_over_pixels(data_array, width, dot_for_blank, brightness, fill_tran){
+    fill_transparency = fill_tran;
     color_treshold = 255 - brightness;
     let result_array = new Array();
     let pixel_array = new Array();
@@ -51,6 +53,9 @@ function get_braille_code(pixel_array, pos, width){
 
 
 function evaluate_pixel(pixel){
+    if (fill_transparency === true && pixel.alpha === 0){
+        return true;
+    }
     if (pixel.red > color_treshold || pixel.green > color_treshold || pixel.blue > color_treshold){
         return true;
     } else {
