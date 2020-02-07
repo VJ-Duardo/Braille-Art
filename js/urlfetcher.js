@@ -1,4 +1,5 @@
 var channel_id = 0;
+var sizes = ['4', '2', '1'];
 const corsproxy = "https://cors-anywhere.herokuapp.com/";
 
 
@@ -6,6 +7,17 @@ function get_json_prom(url){
     return fetch(url)
             .then(response => response.json())
             .then(json => (json));
+}
+
+function check_image_url(url) {
+    var http = new XMLHttpRequest();
+    http.open('HEAD', url, false);
+    http.send();
+    if (http.status !== 404){
+        return true;
+    } else {
+        return false;
+    }
 }
 
 
@@ -16,7 +28,6 @@ function search_ffz(channel, emote){
     function iterate_ffz(obj, attribute){
         for (const item of obj['sets'][attribute]['emoticons']){
             if (item['name'] === emote){
-                let sizes = ['4', '2', '1'];
                 for (const size of sizes){
                     if (item['urls'].hasOwnProperty(size)){
                         return 'https:'+item['urls'][size];
@@ -62,7 +73,12 @@ function search_twitch(emote){
         }
         for (const item of obj['emotes']){
             if (item['code'] === emote){
-                return twitch_metrics + item['id'] + '/4.0';
+                for (const size of sizes){
+                    let url = twitch_metrics + item['id'] + '/'+size+'.0';
+                    if (check_image_url(corsproxy+url)){
+                        return url;
+                    }
+                }
             }
         }
         return -1;
@@ -96,6 +112,12 @@ function search_bttv(channel, emote){
         }
         for (const item of obj['emotes']){
             if (item['code'] === emote){
+                for (const size of sizes){
+                    let url = corsproxy + bttv_pic_link + item['id']+'/'+size+'x';
+                    if (check_image_url(url)){
+                        return url;
+                    }
+                }
                 return corsproxy + bttv_pic_link + item['id']+'/2x';
             }
         }
@@ -122,22 +144,21 @@ function search_bttv(channel, emote){
 
 function search_all(channel, emote){
     return search_ffz(channel, emote)
-            .then ((result_ffz) => {
-                if (typeof result_ffz !== 'undefined') {
-                    return result_ffz;
-                }
-                return search_twitch(emote)
-                    .then((result_twitch) => {
-                        if (typeof result_twitch !== 'undefined') {
-                            return result_twitch;
-                        }
-                        return search_bttv(channel, emote)
-                            .then((result_bttv) => {
-
-                                if (typeof result_bttv !== 'undefined') {
-                                    return result_bttv;
-                                }
-                            });
+        .then ((result_ffz) => {
+            if (typeof result_ffz !== 'undefined') {
+                return result_ffz;
+            }
+            return search_twitch(emote)
+                .then((result_twitch) => {
+                    if (typeof result_twitch !== 'undefined') {
+                        return result_twitch;
+                    }
+                    return search_bttv(channel, emote)
+                        .then((result_bttv) => {
+                            if (typeof result_bttv !== 'undefined') {
+                                return result_bttv;
+                            }
+                        });
                 });
-    });
+        });
 }
