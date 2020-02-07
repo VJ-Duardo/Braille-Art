@@ -20,9 +20,9 @@ function iterate_over_pixels(data_array, width, dot_for_blank, brightness, fill_
     }
     
     if (dot_for_blank){
-        return result_array.join('\n').replace(/[⠀]/g, '⠄');
+        return result_array.join(' \n').replace(/[⠀]/g, '⠄');
     } else {
-        return result_array.join('\n');
+        return result_array.join(' \n');
     }
 }
 
