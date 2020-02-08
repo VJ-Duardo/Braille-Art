@@ -51,6 +51,12 @@ transparency_checkbox.onchange = (function(){
     process_image(cached_url);
 });
 
+emote_input.addEventListener("keyup", function(event) {
+    if (event.keyCode === 13){
+        generate_from_twitch_click();
+    }
+});
+
 
 function click(task) {
     let input = text_input.value;
@@ -87,6 +93,7 @@ function generate_click(){
 }
 
 function generate_from_twitch_click(){
+    
     search_all(channel_input.value.replace(/\s/g, '').toLowerCase(), emote_input.value.replace(/\s/g, ''))
             .then((url) => {
                 if (typeof url === 'undefined'){
