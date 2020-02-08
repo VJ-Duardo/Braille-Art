@@ -2,6 +2,7 @@ var text_input = document.getElementById("input");
 
 var input_select = document.getElementById("inputSelection");
 
+var loading_animation = document.getElementById("loader");
 var twitch_input_table = document.getElementById("twitchInput");
 var channel_input = document.getElementById("channel");
 var emote_input = document.getElementById("emote");
@@ -93,10 +94,11 @@ function generate_click(){
 }
 
 function generate_from_twitch_click(){
-    
+    loading_animation.style.display = "block";
     search_all(channel_input.value.replace(/\s/g, '').toLowerCase(), emote_input.value.replace(/\s/g, ''))
             .then((url) => {
                 if (typeof url === 'undefined'){
+                    loading_animation.style.display = "none";
                     text.nodeValue = "Could not be found.";
                     return;
                 }
@@ -121,6 +123,7 @@ function process_image(src){
     cached_url = src;
     
     image.onload = function(){
+        loading_animation.style.display = "none";
         canvas.width = is_num(width_input.value);
         canvas.height = is_num(height_input.value);
         context.drawImage(image, 0, 0, canvas.width, canvas.height);
