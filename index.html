@@ -47,13 +47,17 @@
                             <td><input type="checkbox" id="transparency" value="True" checked></td>
                             <td><label for="transparency">Fill transparency</label></td>
                         </tr>
+                        <tr>
+                            <td><input type="checkbox" id="dithering" value="False"></td>
+                            <td><label for="dithering">Use dithering</label></td>
+                        </tr>
                     </table>
                 </div>
                 <div class="control">
                     <table>
                         <tr>
                             <td>Brightness: </td>
-                            <td><input type="range" id="brightness" oninput="slider_drag()" min="0" max="255" value="105"></td>
+                            <td><input type="range" id="brightness" oninput="slider_drag()" min="0" max="255" value="0"></td>
                         </tr>
                         <tr>
                             <td>Height:</td>
@@ -106,6 +110,7 @@
         <script src="js/braille_data.js"></script>
         <script src="js/braille.js"></script>
         <script src="js/Pixel.js"></script>
+        <script src="js/dithering.js"></script>
         <script src="js/generate.js"></script>
         <script src="js/urlfetcher.js"></script>
         <script src="js/index.js"></script>
