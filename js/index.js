@@ -151,7 +151,7 @@ function is_num(val){
 
 function toggle_background(){
     if (background_white){
-        text_input.style.background = 'rgba(20,20,20,0.5)';
+        text_input.style.background = 'dimgray';
         text_input.style.color = 'white';
         background_white = false;
     } else {
