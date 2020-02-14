@@ -17,6 +17,7 @@
                     <select id="inputSelection">
                         <option value="twitch">Twitch Emote</option>
                         <option value="upload">Upload</option>
+                        <option value="link">Link</option>
                     </select>
                     <table id="twitchInput">
                         <tr>
@@ -27,15 +28,13 @@
                             <td>Emote: </td>
                             <td><input id="emote" type="text"></td>
                         </tr>
-                        <tr>
-                            <td></td>
-                            <td id="status"></td>
-                        </tr>
                     </table>
+                    <input id="fileinput" type="file" accept=".png, .jpeg, .jpg" style="display: none">
+                    <input id="linkinput" type="text" style="display: none">
+                    <div id="status" style="display: none">Could not be found.</div>
                     <div id="loader" style="display: none">
                         <div id="bar"></div>
                     </div>
-                    <input id="fileinput" type="file" accept=".png, .jpeg, .jpg" style="display: none">
 		</div>
                 <div class="control" id="dotOption">
                     <table>

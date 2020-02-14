@@ -7,10 +7,9 @@ var twitch_input_table = document.getElementById("twitchInput");
 var channel_input = document.getElementById("channel");
 var emote_input = document.getElementById("emote");
 var status_line = document.getElementById("status");
-var text = document.createTextNode("");
-status_line.appendChild(text);
 
 var file_input = document.getElementById("fileinput");
+var link_input = document.getElementById("linkinput");
 
 var option_checkbox = document.getElementById("dotForBlank");
 var transparency_checkbox = document.getElementById("transparency");
@@ -34,15 +33,22 @@ gen_button.onclick = generate_from_twitch_click;
 input_select.onchange = (function(){
     switch(input_select.value){
         case "upload":
-            twitch_input_table.style.display = "none";
             file_input.style.display = "block";
+            twitch_input_table.style.display = "none";
+            link_input.style.display = "none";
             gen_button.onclick = generate_click;
             break;
         case "twitch":
-            file_input.style.display = "none";
             twitch_input_table.style.display = "block";
+            file_input.style.display = "none";
+            link_input.style.display = "none";
             gen_button.onclick = generate_from_twitch_click;
             break;
+        case "link":
+            link_input.style.display = "block";
+            file_input.style.display = "none";
+            twitch_input_table.style.display = "none";
+            gen_button.onclick = generate_from_link;
     }
 });
 
@@ -73,6 +79,12 @@ emote_input.addEventListener("keyup", function(event) {
 channel_input.addEventListener("keyup", function(event) {
     if (event.keyCode === 13){
         generate_from_twitch_click();
+    }
+});
+
+link_input.addEventListener("keyup", function(event) {
+    if (event.keyCode === 13){
+        generate_from_link();
     }
 });
 
@@ -111,16 +123,19 @@ function generate_click(){
     };
 }
 
+function generate_from_link(){
+    process_image(corsproxy+link_input.value);
+}
+
 function generate_from_twitch_click(){
     loading_animation.style.display = "block";
     search_all(channel_input.value.replace(/\s/g, '').toLowerCase(), emote_input.value.replace(/\s/g, ''))
             .then((url) => {
                 if (typeof url === 'undefined'){
                     loading_animation.style.display = "none";
-                    text.nodeValue = "Could not be found.";
+                    status_line.style.display = "block";
                     return;
                 }
-                text.nodeValue = "";
                 process_image(url);
     });
 }
@@ -142,6 +157,7 @@ function process_image(src){
     
     image.onload = function(){
         loading_animation.style.display = "none";
+        status_line.style.display = "none";
         canvas.width = is_num(width_input.value);
         canvas.height = is_num(height_input.value);
         context.drawImage(image, 0, 0, canvas.width, canvas.height);
@@ -149,6 +165,10 @@ function process_image(src){
         text_input.value = iterate_over_pixels(pixel_data, canvas.width, option_checkbox.checked, brightness_input.value, transparency_checkbox.checked, dithering_checkbox.checked, dithering_select.value);
         text_input.cols = Math.ceil(canvas.width/2)*1.5;
         text_input.rows = Math.ceil(canvas.height/4)*1.2;
+    };
+    
+    image.onerror = function(){
+        status_line.style.display = "block";
     };
 }
 
