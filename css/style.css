@@ -18,7 +18,7 @@ textarea {
     z-index: 2;
     margin-left: 10px;
     margin-right: 15px;
-    background:dimgray;
+    background: rgb(40,40,40);
 }
 
 #loader {

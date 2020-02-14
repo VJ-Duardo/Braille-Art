@@ -2,7 +2,7 @@ var color_treshold = 150;
 var fill_transparency = false;
 
 
-function iterate_over_pixels(data_array, width, dot_for_blank, brightness, fill_tran, use_dith){
+function iterate_over_pixels(data_array, width, dot_for_blank, brightness, fill_tran, use_dith, dith_select){
     fill_transparency = fill_tran;
     color_treshold = 255 - brightness;
     let result_array = new Array();
@@ -12,7 +12,11 @@ function iterate_over_pixels(data_array, width, dot_for_blank, brightness, fill_
     }
     
     if (use_dith){
-        pixel_array = ordered_dithering(pixel_array, width, brightness);
+        if (dith_select === "od"){
+            pixel_array = ordered_dithering(pixel_array, width, brightness);
+        } else {
+            pixel_array = floyd_steinberg(pixel_array, width, brightness);
+        }
     }
     
     for(i=0; i<pixel_array.length; i+=(width*4)){

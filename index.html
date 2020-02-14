@@ -49,7 +49,13 @@
                         </tr>
                         <tr>
                             <td><input type="checkbox" id="dithering" value="False"></td>
-                            <td><label for="dithering">Use dithering</label></td>
+                            <td>
+                                <label for="dithering">Use dithering: </label>
+                                <select id="ditheringSelection">
+                                    <option value="od">Ordered dithering</option>
+                                    <option value="fs">Floyd-Steinberg</option>
+                                </select>
+                            </td>
                         </tr>
                     </table>
                 </div>

@@ -15,6 +15,7 @@ var file_input = document.getElementById("fileinput");
 var option_checkbox = document.getElementById("dotForBlank");
 var transparency_checkbox = document.getElementById("transparency");
 var dithering_checkbox = document.getElementById("dithering");
+var dithering_select = document.getElementById("ditheringSelection");
 
 var brightness_input = document.getElementById("brightness");
 var height_input = document.getElementById("height");
@@ -57,7 +58,19 @@ dithering_checkbox.onchange = (function(){
     process_image(cached_url);
 });
 
+dithering_select.onchange = (function(){
+    if (dithering_checkbox.checked){
+        process_image(cached_url);
+    }
+});
+
 emote_input.addEventListener("keyup", function(event) {
+    if (event.keyCode === 13){
+        generate_from_twitch_click();
+    }
+});
+
+channel_input.addEventListener("keyup", function(event) {
     if (event.keyCode === 13){
         generate_from_twitch_click();
     }
@@ -133,7 +146,7 @@ function process_image(src){
         canvas.height = is_num(height_input.value);
         context.drawImage(image, 0, 0, canvas.width, canvas.height);
         let pixel_data = context.getImageData(0, 0, canvas.width, canvas.height).data;
-        text_input.value = iterate_over_pixels(pixel_data, canvas.width, option_checkbox.checked, brightness_input.value, transparency_checkbox.checked, dithering_checkbox.checked);
+        text_input.value = iterate_over_pixels(pixel_data, canvas.width, option_checkbox.checked, brightness_input.value, transparency_checkbox.checked, dithering_checkbox.checked, dithering_select.value);
         text_input.cols = Math.ceil(canvas.width/2)*1.5;
         text_input.rows = Math.ceil(canvas.height/4)*1.2;
     };
@@ -151,7 +164,7 @@ function is_num(val){
 
 function toggle_background(){
     if (background_white){
-        text_input.style.background = 'dimgray';
+        text_input.style.background = 'rgb(40,40,40)';
         text_input.style.color = 'white';
         background_white = false;
     } else {
