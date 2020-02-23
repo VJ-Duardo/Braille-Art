@@ -124,6 +124,7 @@ function generate_click(){
 }
 
 function generate_from_link(){
+    loading_animation.style.display = "block";
     process_image(corsproxy+link_input.value);
 }
 
@@ -168,6 +169,7 @@ function process_image(src){
     };
     
     image.onerror = function(){
+        loading_animation.style.display = "none";
         status_line.style.display = "block";
     };
 }
