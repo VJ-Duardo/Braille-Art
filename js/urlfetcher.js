@@ -20,6 +20,11 @@ function check_image_url(url) {
     }
 }
 
+function is_url(str){
+    let regex = /(ftp|http|https):\/\/.+/;
+    return regex.test(str);
+}
+
 
 function search_ffz(channel, emote){
     let ffz_global = 'https://api.frankerfacez.com/v1/set/global';

@@ -125,7 +125,11 @@ function generate_click(){
 
 function generate_from_link(){
     loading_animation.style.display = "block";
-    process_image(corsproxy+link_input.value);
+    if (is_url(link_input.value)){
+        process_image(link_input.value);
+    } else {
+        set_error_state();
+    }
 }
 
 function generate_from_twitch_click(){
@@ -133,8 +137,7 @@ function generate_from_twitch_click(){
     search_all(channel_input.value.replace(/\s/g, '').toLowerCase(), emote_input.value.replace(/\s/g, ''))
             .then((url) => {
                 if (typeof url === 'undefined'){
-                    loading_animation.style.display = "none";
-                    status_line.style.display = "block";
+                    set_error_state();
                     return;
                 }
                 process_image(url);
@@ -147,7 +150,7 @@ function slider_drag(){
 }
 
 
-function process_image(src){
+function process_image(src, second_try=false){
     if (typeof src === 'undefined'){
         return;
     }
@@ -169,8 +172,11 @@ function process_image(src){
     };
     
     image.onerror = function(){
-        loading_animation.style.display = "none";
-        status_line.style.display = "block";
+        if (second_try && !is_url(src)){
+            set_error_state();
+        } else {
+            process_image(corsproxy+cached_url, true);
+        }
     };
 }
 
@@ -181,6 +187,12 @@ function is_num(val){
     } else {
         return val;
     }
+}
+
+
+function set_error_state(){
+    loading_animation.style.display = "none";
+    status_line.style.display = "block";
 }
 
 
