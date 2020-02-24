@@ -1,3 +1,8 @@
+html {
+    color: WhiteSmoke;
+    background-color: dimgray;
+}
+
 body {
     font-family: arial, helvetica, sans-serif;
     overflow-y: scroll;
@@ -49,4 +54,5 @@ footer {
     left: 0px;
     right: 0px;
     background:rgba(230,230,230,0.5);
+    color: black;
 }

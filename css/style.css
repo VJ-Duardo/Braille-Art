@@ -1,5 +1,7 @@
 html {
     margin-left: 50px;
+    color: WhiteSmoke;
+    background-color: dimgray;
 }
 
 body {
@@ -81,6 +83,7 @@ footer {
     left: 0px;
     right: 0px;
     background:rgba(230,230,230,0.5);
+    color: black;
 }
 
 footer p {
