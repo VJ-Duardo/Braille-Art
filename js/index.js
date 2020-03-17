@@ -172,7 +172,7 @@ function process_image(src, second_try=false){
     };
     
     image.onerror = function(){
-        if (second_try && !is_url(src)){
+        if (second_try){
             set_error_state();
         } else {
             process_image(corsproxy+cached_url, true);
