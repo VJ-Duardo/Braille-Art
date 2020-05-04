@@ -9,17 +9,6 @@ function get_json_prom(url){
             .then(json => (json));
 }
 
-function check_image_url(url) {
-    var http = new XMLHttpRequest();
-    http.open('HEAD', url, false);
-    http.send();
-    if (http.status !== 404){
-        return true;
-    } else {
-        return false;
-    }
-}
-
 function is_url(str){
     let regex = /(ftp|http|https):\/\/.+/;
     return regex.test(str);
@@ -78,12 +67,7 @@ function search_twitch(emote){
         }
         for (const item of obj['emotes']){
             if (item['code'] === emote){
-                for (const size of sizes){
-                    let url = twitch_metrics + item['id'] + '/'+size+'.0';
-                    if (check_image_url(corsproxy+url)){
-                        return url;
-                    }
-                }
+                return twitch_metrics + item['id'] + '/2.0';
             }
         }
         return -1;
@@ -117,12 +101,6 @@ function search_bttv(channel, emote){
         }
         for (const item of obj['emotes']){
             if (item['code'] === emote){
-                for (const size of sizes){
-                    let url = corsproxy + bttv_pic_link + item['id']+'/'+size+'x';
-                    if (check_image_url(url)){
-                        return url;
-                    }
-                }
                 return corsproxy + bttv_pic_link + item['id']+'/2x';
             }
         }
