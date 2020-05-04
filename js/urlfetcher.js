@@ -91,15 +91,15 @@ function search_twitch(emote){
 
 
 function search_bttv(channel, emote){
-    let bttv_global = 'https://api.betterttv.net/2/emotes';
-    let bttv_channel = 'https://api.betterttv.net/2/channels/' + channel;
+    let bttv_global = 'https://api.betterttv.net/3/cached/emotes/global';
+    let bttv_channel = 'https://api.betterttv.net/3/cached/users/twitch/' + channel_id;
     let bttv_pic_link = 'https://cdn.betterttv.net/emote/';
     
     function iterate_bttv(obj){
-        if (obj.hasOwnProperty("message") && obj['message'] === "channel not found"){
+        if (typeof obj === 'undefined'){
             return -1;
         }
-        for (const item of obj['emotes']){
+        for (const item of obj){
             if (item['code'] === emote){
                 return corsproxy + bttv_pic_link + item['id']+'/2x';
             }
@@ -115,7 +115,10 @@ function search_bttv(channel, emote){
             }
             return get_json_prom(bttv_channel)
                 .then((channel_obj) => {
-                    let search_result = iterate_bttv(channel_obj);
+                    if (channel_obj.hasOwnProperty("message") && channel_obj['message'] === "user not found"){
+                        return -1;
+                    }
+                    let search_result = iterate_bttv(channel_obj['channelEmotes'].concat(channel_obj['sharedEmotes']));
                     if (search_result !== -1){
                         return search_result;
                     }
