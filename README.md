@@ -22,4 +22,3 @@ __Used API's and services:__
 * [BetterTTV](https://betterttv.com/)
 * [FrankerFaceZ](https://frankerfacez.com/developers)
 * [CORS Anywhere](https://github.com/Rob--W/cors-anywhere)
-* [Twitch Metrics](https://www.twitchmetrics.net/)
